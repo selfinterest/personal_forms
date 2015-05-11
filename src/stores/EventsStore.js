@@ -3,13 +3,14 @@
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var EllenFormsAppDispatcher = require('../dispatcher/EllenFormsAppDispatcher');
-
+var FormConstants = require("../constants/FormConstants");
+var FormActionTypes = FormConstants.ActionTypes;
 var _events = [];
 var CHANGE_EVENT = "change";
 
 var EventsConstants = {
 	EVENT_CREATE: "event"
-}
+};
 
 function create(someEvent) {
 	var id = Date.now();
@@ -17,7 +18,7 @@ function create(someEvent) {
 		id: id,
 		theEvent: someEvent,
 		executed: false
-	})
+	});
 }
 
 var EventsStore = assign({}, EventEmitter.prototype, {
@@ -36,13 +37,18 @@ EventsStore.on("add", function(someEvent){
 });
 
 
+
 EventsStore.dispatchToken = EllenFormsAppDispatcher.register(function(action) {
 
   switch(action.type) {
+    case FormActionTypes.FORM_INPUT:
+        console.log("Saving the event somewhere");
+        break;
   	case EventsConstants.EVENT_CREATE:
   		var theEvent = action.event;
   		create(theEvent);
-  		EventStore.emitChange();
+  		EventsStore.emitChange();
+          break;
     default:
 
   }

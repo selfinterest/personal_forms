@@ -2,6 +2,7 @@
 
 var React = require('react/addons');
 var ReactTransitionGroup = React.addons.TransitionGroup;
+var EventsStore = require("../stores/EventsStore.js"), FormStore = require("../stores/FormStore");
 
 // CSS
 
