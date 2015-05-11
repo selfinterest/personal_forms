@@ -5,7 +5,8 @@ var path = require('path');
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine'],
+    //frameworks: ['jasmine'],
+    frameworks: ['mocha', 'chai', 'sinon'],
     files: [
       'test/helpers/**/*.js',
       'test/spec/components/**/*.js',
@@ -38,6 +39,12 @@ module.exports = function (config) {
         }, {
           test: /\.css$/,
           loader: 'style-loader!css-loader'
+        }, {
+          test: /\.jsx$/,
+          loaders: ['react-hot', 'jsx-loader?harmony']
+        }, {
+          test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+          loader: 'url-loader?limit=100000'
         }]
       },
       resolve: {
@@ -67,9 +74,10 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
     reporters: ['progress'],
     captureTimeout: 60000,
+    browserNoActivityTimeout: 100000,
     singleRun: true
   });
 };

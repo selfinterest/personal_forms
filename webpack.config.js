@@ -18,6 +18,7 @@ module.exports = {
   debug: true,
   devtool: false,
   entry: [
+      'webpack-dev-server/client?http://0.0.0.0:8000', // WebpackDevServer host and port
       'webpack/hot/only-dev-server',
       './src/components/main.js'
   ],
@@ -40,7 +41,7 @@ module.exports = {
   module: {
     preLoaders: [{
       test: /\.js$/,
-      exclude: /node_modules/,
+      exclude: [/node_modules/, /bower_components/],
       loader: 'jsxhint'
     }],
     loaders: [{
@@ -56,6 +57,12 @@ module.exports = {
     }, {
       test: /\.(png|jpg)$/,
       loader: 'url-loader?limit=8192'
+    }, {
+      test: /\.jsx$/,
+      loaders: ['react-hot', 'jsx-loader?harmony']
+    }, {
+      test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+      loader: 'url-loader?limit=100000'
     }]
   },
 

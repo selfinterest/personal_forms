@@ -73,6 +73,24 @@ module.exports = function (grunt) {
       }
     },
 
+    watch: {
+      files:
+        [
+          'src/**/*.js',
+          'src/**/*.jsx',
+          'test/helpers/**/*.js',
+          'test/spec/components/**/*.js',
+          'test/spec/stores/**/*.js',
+          'test/spec/actions/**/*.js'
+          ],
+      tasks: ['karma'],
+      options: {
+        spawn: false,
+        atBegin: true,
+        reload: true
+      },
+    },
+
     copy: {
       dist: {
         files: [
